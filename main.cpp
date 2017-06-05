@@ -10,6 +10,7 @@ using namespace std::chrono;
 int main(int argc, char** argv){
 
   auto size = stoi(argv[1]);
+  auto max_iterations = stoi(argv[2]);
 
   unsigned int X = size;
   unsigned int Y = size;
@@ -25,7 +26,7 @@ int main(int argc, char** argv){
   int iterations = 0;
   auto start = std::chrono::high_resolution_clock::now();
 
-  for( iterations = 0; iterations < 100 ; iterations++ ) {
+  for( iterations = 0; iterations < max_iterations ; iterations++ ) {
     for ( int y = 0; y != Y; y++ ){
       for ( int x = 0; x != X; x++ ) { 
         targetVector[y] += matrix[x+y*X] * inputVector[x];
@@ -37,6 +38,7 @@ int main(int argc, char** argv){
 
   auto ms = std::chrono::duration_cast<milliseconds>(end - start).count();
   std::cout << "one mult takes " << ms / iterations << " ms val " << targetVector[0] << std::endl;
+  std::cout << "total time " << ms << " ms" << std::endl;
 
   return 0;
 }

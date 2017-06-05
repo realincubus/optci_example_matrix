@@ -23,12 +23,11 @@ int main(int argc, char** argv){
   std::iota(&inputVector[0],&inputVector[X],0);
   std::fill(&targetVector[0], &targetVector[Y], 0); 
 
-  int iterations = 0;
   auto start = std::chrono::high_resolution_clock::now();
 
-  for( iterations = 0; iterations < max_iterations ; iterations++ ) {
-    for ( int y = 0; y != Y; y++ ){
-      for ( int x = 0; x != X; x++ ) { 
+  for( int iterations = 0; iterations < max_iterations ; iterations++ ) {
+    for ( int y = 0; y < Y; y++ ){
+      for ( int x = 0; x < X; x++ ) { 
         targetVector[y] += matrix[x+y*X] * inputVector[x];
       }   
     }   
@@ -37,7 +36,7 @@ int main(int argc, char** argv){
   auto end = std::chrono::high_resolution_clock::now();
 
   auto ms = std::chrono::duration_cast<milliseconds>(end - start).count();
-  std::cout << "one mult takes " << ms / iterations << " ms val " << targetVector[0] << std::endl;
+  std::cout << "one mult takes " << ms / max_iterations << " ms val " << targetVector[0] << std::endl;
   std::cout << "total time " << ms << " ms" << std::endl;
 
   return 0;

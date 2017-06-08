@@ -25,7 +25,9 @@ int main(int argc, char** argv){
 
   auto start = std::chrono::high_resolution_clock::now();
 
-  for( int iterations = 0; iterations < max_iterations ; iterations++ ) {
+  int iterations = max_iterations;
+
+  while( iterations-- ) {
     for ( int y = 0; y < Y; y++ ){
       for ( int x = 0; x < X; x++ ) { 
         targetVector[y] += matrix[x+y*X] * inputVector[x];
